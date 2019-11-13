@@ -1,22 +1,19 @@
 package com.letsstartcoding.springbootrestapiexample.model;
 
-import java.util.Date;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name="Employees")
+@Table(name="Employeetable")
 @EntityListeners(AuditingEntityListener.class)
 public class Employee {
     
@@ -33,9 +30,19 @@ public class Employee {
 	@NotBlank
 	private String experties;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@LastModifiedDate
-	private Date createdat;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Department Department;
+	
+	
+	public Employee() {
+		
+	}
+	public Employee(String name, String designatoion, String experties,Department department) {
+		this.name = name;
+		this.designatoion = designatoion;
+		this.experties = experties;
+		Department = department;
+	}
 
 	public long getId() {
 		return id;
@@ -68,14 +75,16 @@ public class Employee {
 	public void setExperties(String experties) {
 		this.experties = experties;
 	}
-
-	public Date getCreatedat() {
-		return createdat;
+	public Department getDepartment() {
+		return Department;
 	}
-
-	public void setCreatedat(Date createdat) {
-		this.createdat = createdat;
+	public void setDepartment(Department department) {
+		Department = department;
 	}
+	
+
+
+	
 	
 	
 	

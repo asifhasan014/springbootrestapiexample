@@ -60,7 +60,7 @@ public class EmployeeController {
 		emp.setName(empDetails.getName());
 		emp.setDesignatoion(empDetails.getDesignatoion());
 		emp.setExperties(empDetails.getExperties());
-		
+		emp.setDepartment(empDetails.getDepartment());
 		Employee updateEmployee=employeeDAO.save(emp);
 		return ResponseEntity.ok().body(updateEmployee);
 	
